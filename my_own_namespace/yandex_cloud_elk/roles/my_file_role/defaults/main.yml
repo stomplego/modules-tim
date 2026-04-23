@@ -1,0 +1,8 @@
+---
+# Default values for my_file_role
+my_file_path: "/tmp/default_file.txt"
+my_file_content: |
+  This is default content created by my_file_role.
+  Module: my_own_module
+  Collection: my_own_namespace.yandex_cloud_elk
+  Timestamp: {{ ansible_date_time.date | default('unknown') }}
