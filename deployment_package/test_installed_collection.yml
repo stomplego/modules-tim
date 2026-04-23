@@ -1,0 +1,23 @@
+---
+- name: Test installed collection
+  hosts: localhost
+  gather_facts: no
+  
+  tasks:
+    - name: Create file using installed collection
+      my_own_namespace.yandex_cloud_elk.my_own_module:
+        path: "/tmp/installed_collection_test.txt"
+        content: "This file was created from an installed collection!"
+      register: result
+    
+    - name: Show result
+      debug:
+        var: result
+    
+    - name: Verify file content
+      command: cat /tmp/installed_collection_test.txt
+      register: file_content
+    
+    - name: Display file content
+      debug:
+        msg: "File content: {{ file_content.stdout }}"

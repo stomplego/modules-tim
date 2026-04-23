@@ -1,0 +1,84 @@
+---
+- name: Full test of my_own_module and my_file_role
+  hosts: localhost
+  gather_facts: yes
+  vars:
+    test_files:
+      - path: "/tmp/test1.txt"
+        content: "Test content 1"
+      - path: "/tmp/test2.txt"
+        content: "Test content 2 with date: {{ ansible_date_time.date }}"
+      - path: "/tmp/test3.txt"
+        content: |
+          Multi-line test
+          Line 2
+          Line 3
+  tasks:
+    - name: Test 1 - Direct module usage
+      my_own_namespace.yandex_cloud_elk.my_own_module:
+        path: "/tmp/direct_module_test.txt"
+        content: "Direct module call at {{ ansible_date_time.time }}"
+      register: direct_result
+    
+    - name: Show direct module result
+      debug:
+        msg:
+          - "Direct module - changed: {{ direct_result.changed }}"
+          - "Path: {{ direct_result.path }}"
+          - "Size: {{ direct_result.size }} bytes"
+    
+    - name: Test 2 - Using role with custom parameters
+      include_role:
+        name: my_own_namespace.yandex_cloud_elk.my_file_role
+      vars:
+        my_file_path: "/tmp/role_custom_test.txt"
+        my_file_content: "Created by role at {{ ansible_date_time.iso8601 }}"
+      register: role_result
+    
+    - name: Test 3 - Idempotence check (same content)
+      my_own_namespace.yandex_cloud_elk.my_own_module:
+        path: "/tmp/direct_module_test.txt"
+        content: "Direct module call at {{ ansible_date_time.time }}"
+      register: idempotent_result
+    
+    - name: Show idempotence result
+      debug:
+        msg: "Idempotence check - changed: {{ idempotent_result.changed }} (should be false)"
+    
+    - name: Test 4 - Multiple files creation
+      my_own_namespace.yandex_cloud_elk.my_own_module:
+        path: "{{ item.path }}"
+        content: "{{ item.content }}"
+      loop: "{{ test_files }}"
+      register: multi_results
+    
+    - name: Show multi-file results
+      debug:
+        msg: "Created {{ multi_results.results | selectattr('changed') | list | length }} new files"
+
+- name: Verify all files
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: List all test files
+      find:
+        paths: /tmp
+        patterns: "*test*.txt"
+        file_type: file
+      register: found_files
+    
+    - name: Display all created files
+      debug:
+        msg: "Created files: {{ found_files.files | map(attribute='path') | list }}"
+    
+    - name: Show content of each file
+      command: cat "{{ item.path }}"
+      loop: "{{ found_files.files }}"
+      register: file_contents
+      ignore_errors: yes
+    
+    - name: Display file contents
+      debug:
+        msg: "{{ item.item.path }}:\n{{ item.stdout }}"
+      loop: "{{ file_contents.results }}"
+      when: item.stdout is defined

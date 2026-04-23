@@ -1,0 +1,10 @@
+---
+- name: Simple usage of my_file_role
+  hosts: localhost
+  gather_facts: yes
+  
+  roles:
+    - role: my_own_namespace.yandex_cloud_elk.my_file_role
+      vars:
+        my_file_path: "/tmp/quick_test.txt"
+        my_file_content: "Quick test of my_file_role at {{ ansible_date_time.time }}"

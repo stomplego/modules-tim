@@ -1,0 +1,15 @@
+---
+- name: Test my_file_role with default parameters
+  hosts: localhost
+  gather_facts: yes
+  roles:
+    - role: my_own_namespace.yandex_cloud_elk.my_file_role
+
+- name: Test my_file_role with custom parameters
+  hosts: localhost
+  gather_facts: yes
+  vars:
+    my_file_path: "/tmp/custom_file.txt"
+    my_file_content: "This is custom content from test playbook!"
+  roles:
+    - role: my_own_namespace.yandex_cloud_elk.my_file_role
