@@ -188,6 +188,15 @@ if __name__ == '__main__':
 
 **Шаг 17.** В ответ необходимо прислать ссылки на collection и tar.gz архив, а также скриншоты выполнения пунктов 4, 6, 15 и 16.
 
+Ссылка на collection - https://github.com/stomplego/modules-tim/tree/main/my_own_namespace/yandex_cloud_elk
+
+Ссылка на tar - https://github.com/stomplego/modules-tim/blob/main/deployment_package/my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz
+
+!["zadanie4"](./images/zadanie4.png)
+!["zadanie6"](./images/zadanie6.png)
+!["zadanie15"](./images/zadanie15.png)
+!["zadanie16"](./images/zadanie16.png)
+
 ---
 
 ### Как оформить решение задания
@@ -195,3 +204,22 @@ if __name__ == '__main__':
 Выполненное домашнее задание пришлите в виде ссылки на .md-файл в вашем репозитории.
 
 ---
+
+## Скриншоты выполнения задания
+
+### Пункт 4 - Проверка модуля на исполняемость локально
+![Пункт 4](deployment_package/images/zadanie4.png)
+
+### Пункт 6 - Проверка идемпотентности через playbook
+![Пункт 6](deployment_package/images/zadanie6.png)
+
+### Пункт 15 - Установка коллекции из локального архива
+![Пункт 15](deployment_package/images/zadanie15.png)
+
+### Пункт 16 - Запуск playbook и проверка работы
+![Пункт 16](deployment_package/images/zadanie16.png)
+
+## Ссылки
+
+- **Коллекция:** [my_own_namespace.yandex_cloud_elk](my_own_namespace/yandex_cloud_elk)
+- **Архив коллекции:** [my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz](deployment_package/my_own_namespace-yandex_cloud_elk-1.0.0.tar.gz)
