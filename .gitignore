@@ -1,0 +1,7 @@
+*.pyc
+pycache/
+*.tar.gz
+.ansible/
+*.retry
+venv/
+.env/

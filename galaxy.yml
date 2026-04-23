@@ -1,0 +1,22 @@
+---
+namespace: my_own_namespace
+name: yandex_cloud_elk
+version: 1.0.0
+readme: README.md
+authors:
+  - "Your Name <your.email@example.com>"
+description: Collection for Yandex Cloud ELK stack with custom modules
+license:
+  - GPL-3.0-or-later
+tags:
+  - yandex
+  - cloud
+  - elk
+  - file
+  - custom
+repository: https://github.com/yourusername/my_own_collection
+documentation: https://github.com/yourusername/my_own_collection
+homepage: https://github.com/yourusername/my_own_collection
+issues: https://github.com/yourusername/my_own_collection/issues
+dependencies: {}
+build_ignore: []

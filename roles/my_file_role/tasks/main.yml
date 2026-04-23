@@ -1,0 +1,14 @@
+---
+- name: Create file using my_own_module
+  my_own_namespace.yandex_cloud_elk.my_own_module:
+    path: "{{ my_file_path }}"
+    content: "{{ my_file_content }}"
+  register: file_result
+
+- name: Display file creation result
+  debug:
+    msg:
+      - "File path: {{ file_result.path }}"
+      - "Changed: {{ file_result.changed }}"
+      - "Content written: {{ file_result.content }}"
+  when: file_result.changed is defined
